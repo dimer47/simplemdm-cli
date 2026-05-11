@@ -113,7 +113,7 @@ func serveMCP(opts *MCPOptions) error {
 		mcp.WithString("key", mcp.Required(), mcp.Description("Config key")),
 		mcp.WithString("value", mcp.Description("Config value")),
 		mcp.WithString("value_type", mcp.Description("Value type: boolean, date, float, float array, integer, integer array, string, string array")),
-	), makeFormHandler(opts, "POST", func(r mcp.CallToolRequest) (string, map[string]string) {
+	), makeMultipartHandler(opts, "POST", func(r mcp.CallToolRequest) (string, map[string]string) {
 		return "/apps/" + getString(r, "app_id") + "/managed_configs", extractFormValues(r, "key", "value", "value_type")
 	}))
 
@@ -352,11 +352,11 @@ func serveMCP(opts *MCPOptions) error {
 		mcp.WithDescription("Update a custom configuration profile"),
 		mcp.WithString("profile_id", mcp.Required(), mcp.Description("Profile ID")),
 		mcp.WithString("name", mcp.Description("Profile name")),
-		mcp.WithString("user_scope", mcp.Description("User scope")),
-		mcp.WithString("attribute_support", mcp.Description("Enable attribute support: true or false")),
-		mcp.WithString("escape_attributes", mcp.Description("Escape attributes: true or false")),
-		mcp.WithString("reinstall_after_os_update", mcp.Description("Reinstall after OS update: true or false")),
-		mcp.WithString("declarative", mcp.Description("Declarative profile: true or false")),
+		mcp.WithBoolean("user_scope", mcp.Description("User scope")),
+		mcp.WithBoolean("attribute_support", mcp.Description("Enable attribute support")),
+		mcp.WithBoolean("escape_attributes", mcp.Description("Escape attributes")),
+		mcp.WithBoolean("reinstall_after_os_update", mcp.Description("Reinstall after OS update")),
+		mcp.WithBoolean("declarative", mcp.Description("Declarative profile")),
 	), makeFormHandler(opts, "PATCH", func(r mcp.CallToolRequest) (string, map[string]string) {
 		return "/custom_configuration_profiles/" + getString(r, "profile_id"), extractFormValues(r, "name", "user_scope", "attribute_support", "escape_attributes", "reinstall_after_os_update", "declarative")
 	}))
@@ -416,9 +416,9 @@ func serveMCP(opts *MCPOptions) error {
 		mcp.WithString("declaration_id", mcp.Required(), mcp.Description("Declaration ID")),
 		mcp.WithString("name", mcp.Description("Declaration name")),
 		mcp.WithString("declaration_type", mcp.Description("Declaration type")),
-		mcp.WithString("user_scope", mcp.Description("User scope")),
-		mcp.WithString("attribute_support", mcp.Description("Enable attribute support: true or false")),
-		mcp.WithString("escape_attributes", mcp.Description("Escape attributes: true or false")),
+		mcp.WithBoolean("user_scope", mcp.Description("User scope")),
+		mcp.WithBoolean("attribute_support", mcp.Description("Enable attribute support")),
+		mcp.WithBoolean("escape_attributes", mcp.Description("Escape attributes")),
 		mcp.WithString("activation_predicate", mcp.Description("Activation predicate")),
 	), makeFormHandler(opts, "PATCH", func(r mcp.CallToolRequest) (string, map[string]string) {
 		return "/custom_declarations/" + getString(r, "declaration_id"), extractFormValues(r, "name", "declaration_type", "user_scope", "attribute_support", "escape_attributes", "activation_predicate")
@@ -1013,7 +1013,7 @@ func serveMCP(opts *MCPOptions) error {
 		mcp.WithDescription("Update a script"),
 		mcp.WithString("script_id", mcp.Required(), mcp.Description("Script ID")),
 		mcp.WithString("name", mcp.Description("Script name")),
-		mcp.WithString("variable_support", mcp.Description("Enable variable support: true or false")),
+		mcp.WithNumber("variable_support", mcp.Description("Enable variable support: 0 or 1")),
 	), makeFormHandler(opts, "PATCH", func(r mcp.CallToolRequest) (string, map[string]string) {
 		return "/scripts/" + getString(r, "script_id"), extractFormValues(r, "name", "variable_support")
 	}))
@@ -1050,7 +1050,7 @@ func serveMCP(opts *MCPOptions) error {
 		mcp.WithString("group_ids", mcp.Description("Comma-separated device group IDs (deprecated)")),
 		mcp.WithString("custom_attribute", mcp.Description("Custom attribute filter")),
 		mcp.WithString("custom_attribute_regex", mcp.Description("Custom attribute regex filter")),
-	), makeFormHandler(opts, "POST", func(r mcp.CallToolRequest) (string, map[string]string) {
+	), makeMultipartHandler(opts, "POST", func(r mcp.CallToolRequest) (string, map[string]string) {
 		return "/script_jobs", extractFormValues(r, "script_id", "device_ids", "assignment_group_ids", "group_ids", "custom_attribute", "custom_attribute_regex")
 	}))
 
@@ -1140,6 +1140,23 @@ func extractFormValues(r mcp.CallToolRequest, keys ...string) map[string]string 
 		}
 	}
 	return values
+}
+
+func makeMultipartHandler(opts *MCPOptions, method string, pathFn func(mcp.CallToolRequest) (string, map[string]string)) server.ToolHandlerFunc {
+	return func(ctx context.Context, r mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		client, err := opts.GetClient()
+		if err != nil {
+			return mcp.NewToolResultError(err.Error()), nil
+		}
+
+		path, values := pathFn(r)
+		data, err := client.DoMultipart(method, path, values, "", "")
+		if err != nil {
+			return mcp.NewToolResultError(err.Error()), nil
+		}
+
+		return mcp.NewToolResultText(string(data)), nil
+	}
 }
 
 func makeJSONHandler(opts *MCPOptions, method string, pathFn func(mcp.CallToolRequest) (string, string)) server.ToolHandlerFunc {

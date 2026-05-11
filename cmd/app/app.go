@@ -243,7 +243,7 @@ func newManagedConfigsCreateCmd(opts *Options) *cobra.Command {
 			value, _ := cmd.Flags().GetString("value")
 			valueType, _ := cmd.Flags().GetString("value-type")
 			values := map[string]string{"key": key, "value": value, "value_type": valueType}
-			data, err := client.DoForm("POST", "/apps/"+args[0]+"/managed_configs", values)
+			data, err := client.DoMultipart("POST", "/apps/"+args[0]+"/managed_configs", values, "", "")
 			if err != nil {
 				return err
 			}

@@ -101,7 +101,7 @@ func newCreateCmd(opts *Options) *cobra.Command {
 			if car, _ := cmd.Flags().GetString("custom-attribute-regex"); car != "" {
 				values["custom_attribute_regex"] = car
 			}
-			data, err := client.DoForm("POST", "/script_jobs", values)
+			data, err := client.DoMultipart("POST", "/script_jobs", values, "", "")
 			if err != nil {
 				return err
 			}
