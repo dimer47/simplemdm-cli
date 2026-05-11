@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "managed_config",
+      "id": 15,
+      "attributes": {
+        "key": "server_url",
+        "value": "https://api.company.com",
+        "value_type": "string"
+      }
+    }
+  ],
+  "has_more": false
+}

@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "type": "app",
+      "id": 10,
+      "attributes": {
+        "name": "Slack",
+        "app_type": "app_store",
+        "bundle_identifier": "com.tinyspeck.chatlyio",
+        "version": "24.03.10"
+      }
+    },
+    {
+      "type": "app",
+      "id": 11,
+      "attributes": {
+        "name": "Custom App",
+        "app_type": "enterprise",
+        "bundle_identifier": "com.company.customapp",
+        "version": "1.2.0"
+      }
+    }
+  ],
+  "has_more": false
+}

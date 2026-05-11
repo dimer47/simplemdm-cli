@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "type": "device",
+      "id": 121,
+      "attributes": {
+        "name": "Mike's iPhone",
+        "serial_number": "C02Q000ABCD",
+        "model": "iPhone 15 Pro",
+        "os_version": "17.4.1",
+        "status": "enrolled",
+        "last_seen_at": "2024-03-15T10:30:00.000+00:00"
+      }
+    },
+    {
+      "type": "device",
+      "id": 122,
+      "attributes": {
+        "name": "Office MacBook",
+        "serial_number": "C02R111EFGH",
+        "model": "MacBook Pro 14-inch",
+        "os_version": "14.4",
+        "status": "enrolled",
+        "last_seen_at": "2024-03-15T09:15:00.000+00:00"
+      }
+    }
+  ],
+  "has_more": false
+}

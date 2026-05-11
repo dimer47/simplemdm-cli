@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "type": "log",
+      "id": 300,
+      "attributes": {
+        "namespace": "device",
+        "event_type": "enrolled",
+        "level": "info",
+        "source": "system",
+        "at": "2024-03-15T10:00:00.000+00:00",
+        "metadata": {}
+      }
+    }
+  ],
+  "has_more": false
+}

@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "custom_declaration",
+      "id": 55,
+      "attributes": {
+        "name": "Passcode Policy",
+        "identifier": "com.company.passcode",
+        "payload_json": "{}"
+      }
+    }
+  ],
+  "has_more": false
+}

@@ -1,0 +1,4 @@
+dist/
+simplemdm-cli
+*.exe
+.DS_Store

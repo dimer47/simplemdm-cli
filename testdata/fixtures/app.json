@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "app",
+    "id": 10,
+    "attributes": {
+      "name": "Slack",
+      "app_type": "app_store",
+      "bundle_identifier": "com.tinyspeck.chatlyio",
+      "version": "24.03.10",
+      "itunes_store_id": 618783545,
+      "managed_config_enabled": true
+    }
+  }
+}

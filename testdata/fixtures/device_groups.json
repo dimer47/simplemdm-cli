@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "type": "device_group",
+      "id": 40,
+      "attributes": {
+        "name": "All iPhones"
+      }
+    },
+    {
+      "type": "device_group",
+      "id": 41,
+      "attributes": {
+        "name": "All Macs"
+      }
+    }
+  ],
+  "has_more": false
+}

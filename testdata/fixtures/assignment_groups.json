@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "type": "assignment_group",
+      "id": 30,
+      "attributes": {
+        "name": "Engineering Team",
+        "auto_deploy": true
+      }
+    },
+    {
+      "type": "assignment_group",
+      "id": 31,
+      "attributes": {
+        "name": "Marketing Team",
+        "auto_deploy": false
+      }
+    }
+  ],
+  "has_more": false
+}

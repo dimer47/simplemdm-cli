@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "profile",
+      "id": 90,
+      "attributes": {
+        "name": "WiFi Profile",
+        "profile_identifier": "com.company.wifi",
+        "user_scope": false
+      }
+    }
+  ],
+  "has_more": false
+}

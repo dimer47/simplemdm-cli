@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "enrollment",
+      "id": 80,
+      "attributes": {
+        "url": "https://a.]simplemdm.com/e/12345",
+        "welcome_screen": true,
+        "authentication": false
+      }
+    }
+  ],
+  "has_more": false
+}

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "type": "account",
+    "id": 1,
+    "attributes": {
+      "name": "Test Company",
+      "apple_store_country_code": "US"
+    }
+  }
+}

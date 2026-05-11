@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "custom_configuration_profile",
+      "id": 60,
+      "attributes": {
+        "name": "VPN Config",
+        "user_scope": false,
+        "reinstall_after_os_update": false
+      }
+    }
+  ],
+  "has_more": false
+}
